@@ -1,39 +1,43 @@
+<<<<<<< HEAD
 # new-token-pair-spam-trap
 =======
 # Drosera Trap Foundry Template
+=======
+# New Token Pair Spam Trap
+>>>>>>> 59d8b61 (Initial commit: New Token Pair Spam Trap (Simulated Data Template))
 
-This repo is for quickly bootstrapping a new Drosera project. It includes instructions for creating your first trap, deploying it to the Drosera network, and updating it on the fly.
+This project implements a **Simulated Data Template** trap for the Drosera Network.
 
-[![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](https://dev.drosera.io "Project documentation")
-[![Twitter](https://img.shields.io/twitter/follow/DroseraNetwork?style=for-the-badge)](https://x.com/DroseraNetwork)
+### Overview
 
-## Configure dev environment
+The `NewTokenPairSpamTrap` monitors for a sudden increase in token pair creation — which can indicate spam or automated liquidity attacks.
 
-```bash
-curl -L https://foundry.paradigm.xyz | bash
-foundryup
+Because Hoodi testnet lacks reliable DEX deployments, this trap simulates the pair count internally.
 
-# The trap-foundry-template utilizes node modules for dependency management
-# install Bun (optional)
-curl -fsSL https://bun.sh/install | bash
+### How It Works
 
-# install node modules
-bun install
+- The trap has an internal variable `simulatedPairCount`.
+- You can manually change this value via `incrementSimulatedPairs(uint256 n)` to simulate activity.
+- `collect()` encodes the current count.
+- `shouldRespond()` compares the two most recent values and triggers if the difference exceeds 5.
+- The response contract emits an event when triggered.
 
-# install vscode (optional)
-# - add solidity extension JuanBlanco.solidity
+### Simulation Pattern
 
-# install drosera-cli
-curl -L https://app.drosera.io/install | bash
-droseraup
-```
+This trap follows Drosera’s **Simulated Data Template** rules:
+- No external dApp calls.
+- Uses internal state to simulate external data.
+- Deterministic `shouldRespond()` logic for testability.
 
-open the VScode preferences and Select `Soldity: Change workpace compiler version (Remote)`
+### Deployment
 
-Select version `0.8.12`
+- **Trap:** `0xa98663ff5Bf9c2F414E4aC50B4661c02080cb34D`
+- **Response:** `0x4eFBddb0ef142124fcfe2D2BCD6d0Ae4eE3847B6`
+- **Network:** Hoodi Testnet (`https://rpc.hoodi.ethpandaops.io`)
 
-## Quick Start
+### Testing
 
+<<<<<<< HEAD
 ### Hello World Trap
 
 The drosera.toml file is configured to deploy a simple "Hello, World!" trap. Ensure the drosera.toml file is set to the following configuration:
@@ -95,3 +99,8 @@ Example tests are included in the `tests` directory. They simulate how Drosera O
 forge test
 ```
 >>>>>>> 58648cd (chore: init from https://github.com/drosera-network/trap-foundry-template at c4bc7e3)
+=======
+You can simulate spam by running:
+```solidity
+trap.incrementSimulatedPairs(10);
+>>>>>>> 59d8b61 (Initial commit: New Token Pair Spam Trap (Simulated Data Template))
